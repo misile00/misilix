@@ -21,5 +21,4 @@ jobs:
           prerelease: false
           title: "Auto build Misilix Server v1.0.0"
           files: |
-            *.img
             *.img.xz

@@ -21,5 +21,4 @@ jobs:
           prerelease: true
           title: "Auto build Misilix Desktop v0.1.0"
           files: |
-            *.img
             *.img.xz
