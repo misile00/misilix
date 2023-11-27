@@ -152,7 +152,7 @@ cp etc/pacman.conf misilix/etc/pacman.conf
 cp etc/systemd/system/pacman-init.service etc/systemd/system/resize-fs.service misilix/etc/systemd/system/
 cp etc/NetworkManager/conf.d/wifi_backend.conf misilix/etc/NetworkManager/conf.d/wifi_backend.conf
 cp etc/sysctl.d/99-misilix.conf misilix/etc/sysctl.d/
-chroot misilix /usr/bin/qemu-aarch64-static /usr/bin/systemctl enable pacman-init.service resize-fs.service NetworkManager.service sshd.service avahi-daemon.service
+chroot misilix /usr/bin/systemctl enable pacman-init.service resize-fs.service NetworkManager.service sshd.service avahi-daemon.service
 sed -i s/#NTP=/NTP=0.pool.ntp.org/g misilix/etc/systemd/timesyncd.conf
 echo -e "\nen_US.UTF-8 UTF-8\nen_US ISO-8859-1" >> misilix/etc/locale.gen
 echo "LANG=en_US.UTF-8" > misilix/etc/locale.conf
@@ -161,9 +161,9 @@ sed -i "s/Arch Linux/Misilix Linux/g" misilix/etc/issue
 sed -i "s/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g" misilix/etc/sudoers
 
 # Create default user accounts
-chroot misilix /usr/bin/qemu-aarch64-static /bin/bash -c "useradd alarm -mUG wheel -m -u 1000"
-echo -e "root\nroot\n" | chroot misilix /usr/bin/qemu-aarch64-static /bin/bash -c "passwd root"
-echo -e "alarm\nalarm\n" | chroot misilix /usr/bin/qemu-aarch64-static /bin/bash -c "passwd alarm"
+chroot misilix /bin/bash -c "useradd alarm -mUG wheel -m -u 1000"
+echo -e "root\nroot\n" | chroot misilix /bin/bash -c "passwd root"
+echo -e "alarm\nalarm\n" | chroot misilix /bin/bash -c "passwd alarm"
 find misilix/var/log/ -type f | xargs rm -f
 
 # Create image
