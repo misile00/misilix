@@ -1,0 +1,13 @@
+[Unit]
+Description=Initializes Pacman keyring
+After=multi-user.target resize-fs.service
+Before=shutdown.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/pacman-init.sh
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,25 @@
+name: Create desktop image 
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: build
+        run: |
+          sudo bash build_desktop.sh
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "desktop"
+          prerelease: true
+          title: "Auto build Misilix Desktop v0.1.0"
+          files: |
+            *.img
+            *.img.xz
