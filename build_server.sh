@@ -191,5 +191,5 @@ cp -prfv misilix/* /mnt/ 2>&1 > /dev/null
 sync
 umount /mnt
 losetup -d /dev/loop0
-xz -T0 --keep misilix-server.img
+xz -T0  misilix-server.img
 # Done
