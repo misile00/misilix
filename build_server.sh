@@ -3,9 +3,11 @@ set -ex
 
 # Install required packages if host Debian/Ubuntu
 if [[ -d /var/lib/apt/ ]] ; then
-    sed -i s/jammy/noble/g /etc/apt/sources.list
+    cp /etc/apt/sources.list /etc/apt/sources.list.d/noble.list
+    sed -i s/jammy/noble/g /etc/apt/sources.list.d/noble.list
     apt update
-    apt install arch-install-scripts wget qemu-user-static binfmt-support wget unzip qemu-utils --install-suggests -y
+    apt -t noble install arch-install-scripts --install-suggests -y
+    apt -t jammy install wget qemu-user-static binfmt-support wget unzip qemu-utils --install-suggests -y
 fi
 
 mkdir -p misilix
@@ -150,7 +152,7 @@ cp etc/pacman.conf misilix/etc/pacman.conf
 cp etc/systemd/system/pacman-init.service etc/systemd/system/resize-fs.service misilix/etc/systemd/system/
 cp etc/NetworkManager/conf.d/wifi_backend.conf misilix/etc/NetworkManager/conf.d/wifi_backend.conf
 cp etc/sysctl.d/99-misilix.conf misilix/etc/sysctl.d/
-chroot misilix /usr/bin/systemctl enable pacman-init.service resize-fs.service NetworkManager.service sshd.service avahi-daemon.service
+chroot misilix /usr/bin/qemu-aarch64-static /usr/bin/systemctl enable pacman-init.service resize-fs.service NetworkManager.service sshd.service avahi-daemon.service
 sed -i s/#NTP=/NTP=0.pool.ntp.org/g misilix/etc/systemd/timesyncd.conf
 echo -e "\nen_US.UTF-8 UTF-8\nen_US ISO-8859-1" >> misilix/etc/locale.gen
 echo "LANG=en_US.UTF-8" > misilix/etc/locale.conf
@@ -159,13 +161,13 @@ sed -i "s/Arch Linux/Misilix Linux/g" misilix/etc/issue
 sed -i "s/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g" misilix/etc/sudoers
 
 # Create default user accounts
-chroot misilix /bin/bash -c "useradd alarm -mUG wheel -m -u 1000"
-echo -e "root\nroot\n" | chroot misilix /bin/bash -c "passwd root"
-echo -e "alarm\nalarm\n" | chroot misilix /bin/bash -c "passwd alarm"
+chroot misilix /usr/bin/qemu-aarch64-static /bin/bash -c "useradd alarm -mUG wheel -m -u 1000"
+echo -e "root\nroot\n" | chroot misilix /usr/bin/qemu-aarch64-static /bin/bash -c "passwd root"
+echo -e "alarm\nalarm\n" | chroot misilix /usr/bin/qemu-aarch64-static /bin/bash -c "passwd alarm"
 find misilix/var/log/ -type f | xargs rm -f
 
 # Create image
-size=$(echo "($(du -s "misilix" | cut -f 1) * 1.3) / 1" | bc)
+size=$(echo "($(du -s "misilix" | cut -f 1) * 1.5) / 1" | bc)
 qemu-img create "misilix-server.img" ${size}k
 parted -s "misilix-server.img" mklabel msdos
 parted -s "misilix-server.img" mkpart primary fat32 0 300M 
@@ -179,13 +181,13 @@ mkfs.btrfs ${loop}p2 -L "ROOT_MSL"
 
 # Copy boot partition
 mount ${loop}p1 /mnt
-cp -prfv misilix/boot/* /mnt/
+cp -prfv misilix/boot/* /mnt/ 2>&1 > /dev/null
 sync
 umount -f /mnt
 
 # Copy rootfs partition
 mount ${loop}p2 /mnt
-cp -prfv misilix/* /mnt/
+cp -prfv misilix/* /mnt/ 2>&1 > /dev/null
 sync
 umount /mnt
 losetup -d /dev/loop0

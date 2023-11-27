@@ -11,8 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: build
-        run: |
-          sudo bash build_desktop.sh
+        run: sudo bash build_desktop.sh
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
