@@ -1,7 +1,7 @@
 name: Create server image 
 on:
   push:
-    branches: [ main ]
+    branches: [ server ]
   schedule:
     - cron: "0 0 * * 0"
 

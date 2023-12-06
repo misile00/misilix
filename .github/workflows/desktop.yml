@@ -1,7 +1,7 @@
 name: Create desktop image 
 on:
   push:
-    branches: [ main ]
+    branches: [ desktop ]
   schedule:
     - cron: "0 0 * * 0"
 
