@@ -1,7 +1,7 @@
 name: Create desktop image 
 on:
   push:
-    branches: [ desktop ]
+    branches: [ master ]
   schedule:
     - cron: "0 0 * * 0"
 
@@ -19,6 +19,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "desktop"
           prerelease: true
-          title: "Auto build Misilix Desktop v0.1.0"
+          title: "Auto build | Misilix Desktop v0.1.0"
           files: |
             *.img.xz

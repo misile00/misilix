@@ -34,6 +34,10 @@ Server = http://mirror.archlinuxarm.org/\$arch/\$repo/
 [aur]
 Server = http://mirror.archlinuxarm.org/\$arch/\$repo/
 
+[aurci2]
+SigLevel = Optional TrustAll
+Server = https://github.com/misile00/misilix/releases/download/aurci2
+
 EOF
 
 # Initialize pacman keyring and populate Arch Linux keyring
