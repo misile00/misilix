@@ -76,6 +76,7 @@ python-defusedxml
 python-packaging
 python-pyqt5
 raspberrypi-bootloader
+raspi-config-git
 rsync
 rtkit
 sed

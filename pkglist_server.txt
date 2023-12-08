@@ -50,6 +50,7 @@ patch
 pkgconf
 python
 raspberrypi-bootloader
+raspi-config-git
 rsync
 texinfo
 usb_modeswitch
