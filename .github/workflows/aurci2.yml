@@ -3,7 +3,7 @@ name: Make Repository
 on:
   push:
     branches:
-      - main
+      - master
   schedule:
     - cron: "21 4 * * 0"
 
