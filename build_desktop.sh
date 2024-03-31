@@ -149,6 +149,7 @@ if which service ; then
 fi
 
 # Configure system
+echo -e "allowed_users=anybody\nneeds_root_rights=yes" > /etc/X11/Xwrapper.config
 cp usr/local/resize-fs.sh misilix/usr/local/
 cp etc/profile.d/pacman-init.sh misilix/etc/profile.d/
 chmod a+x misilix/etc/profile.d/pacman-init.sh misilix/usr/local/resize-fs.sh
@@ -160,12 +161,14 @@ chroot misilix /usr/bin/systemctl enable pacman-init.service resize-fs.service N
 sed -i s/#NTP=/NTP=0.pool.ntp.org/g misilix/etc/systemd/timesyncd.conf
 echo -e "\nen_US.UTF-8 UTF-8\nen_US ISO-8859-1" >> misilix/etc/locale.gen
 echo "LANG=en_US.UTF-8" > misilix/etc/locale.conf
+echo "KEYMAP=trq" > misilix/etc/console.conf
 echo -e "nameserver 8.8.8.8\nnameserver 8.8.8.4" > misilix/etc/resolv.conf
 sed -i "s/Arch Linux/Misilix Linux/g" misilix/etc/issue
 sed -i "s/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g" misilix/etc/sudoers
+chroot misilix /usr/bin/locale-gen
 
 # Create default user accounts
-chroot misilix /bin/bash -c "useradd alarm -mUG wheel -m -u 1000"
+chroot misilix /bin/bash -c "useradd alarm -mUG wheel,video,tty,audio -m -u 1000"
 echo -e "root\nroot\n" | chroot misilix /bin/bash -c "passwd root"
 echo -e "alarm\nalarm\n" | chroot misilix /bin/bash -c "passwd alarm"
 find misilix/var/log/ -type f | xargs rm -f

@@ -48,7 +48,6 @@ hwdetect
 inxi
 iwd
 lightdm
-lightdm
 lightdm-gtk-greeter
 lightdm-slick-greeter
 linux-rpi
@@ -72,6 +71,7 @@ nss-mdns
 openssh
 pacman-contrib
 pavucontrol
+pipewire
 pipewire-alsa
 pipewire-jack
 pipewire-pulse
@@ -134,4 +134,5 @@ xfce4-xkb-plugin
 xl2tpd
 xorg
 xorg-drivers
+xorg-xinit
 xterm

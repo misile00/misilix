@@ -160,9 +160,11 @@ chroot misilix /usr/bin/systemctl enable pacman-init.service resize-fs.service N
 sed -i s/#NTP=/NTP=0.pool.ntp.org/g misilix/etc/systemd/timesyncd.conf
 echo -e "\nen_US.UTF-8 UTF-8\nen_US ISO-8859-1" >> misilix/etc/locale.gen
 echo "LANG=en_US.UTF-8" > misilix/etc/locale.conf
+echo "KEYMAP=trq" > misilix/etc/console.conf
 echo -e "nameserver 8.8.8.8\nnameserver 8.8.8.4" > misilix/etc/resolv.conf
 sed -i "s/Arch Linux/Misilix Linux/g" misilix/etc/issue
 sed -i "s/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g" misilix/etc/sudoers
+chroot misilix /usr/bin/locale-gen
 
 # Create default user accounts
 chroot misilix /bin/bash -c "useradd alarm -mUG wheel -m -u 1000"
