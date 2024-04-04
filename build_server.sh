@@ -150,7 +150,7 @@ fi
 
 # Configure system
 cp usr/local/resize-fs.sh misilix/usr/local/
-cp etc/ misilix/etc/
+cp -r etc/ misilix/etc/
 chmod a+x misilix/etc/profile.d/pacman-init.sh misilix/usr/local/resize-fs.sh
 chroot misilix /usr/bin/systemctl enable pacman-init.service resize-fs.service NetworkManager.service sshd.service avahi-daemon.service
 sed -i s/#NTP=/NTP=0.pool.ntp.org/g misilix/etc/systemd/timesyncd.conf
