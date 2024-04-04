@@ -4,6 +4,9 @@ Blue='\033[0;34m'
 Yellow='\033[0;33m'
 NC='\033[0m' # No Color
 
+export HISTIGNORE='*sudo -S*'
+echo "alarm" | sudo -S -k true
+
 if sudo -n true
 then
     pacman --init

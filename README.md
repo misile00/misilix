@@ -12,7 +12,7 @@ Misilix is a Linux distribution based on Arch Linux ARM, designed for Raspberry 
 
 To install Misilix, you'll need a Micro SD Card with a minimum capacity of 8GB. Afterward, you'll need to download the image. To write the downloaded image, use the following commands:
 ```bash
-xz --decompress misilix-*.img.xz
+xz --decompress --keep misilix-*.img.xz
 dd if=misilix-*.img of=/dev/sda oflag=sync bs=4M status=progress
 ```
 > **Note:** Make sure to replace `misilix-*.img` with the actual name of the Misilix image file you downloaded, and `/dev/sda` with the appropriate destination on your system.

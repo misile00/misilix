@@ -1,0 +1,44 @@
+name: Make Repository
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "21 4 * * 0"
+
+jobs:
+  build_repository:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        PKG: [raspi-config-git, thorium-browser-bin]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Get current time and date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M')"
+    - name: Makepkg Build and Check
+      id: makepkg
+      uses: misile00/pkgbuild-action@v1
+      with:
+        pkgdir: pkgs/${{ matrix.PKG }}
+        repoName: "pkgbuild-ci"
+        makepkgArgs: "-A"
+    - name: Print Package Files
+      run: |
+        echo "Successfully created the following package archive"
+        echo "Package: ${{ steps.makepkg.outputs.pkgfile0 }}"
+    - name: Upload Files to Release
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: pkgbuild-ci
+        name: pkgbuild-ci build ${{ github.run_number }} from ${{ steps.date.outputs.date }}
+        body: pkgbuild-ci build ${{ github.run_number }} from ${{ steps.date.outputs.date }}
+        files: |
+          ${{ github.workspace }}/repo/*
+        draft: false
+        prerelease: false
