@@ -41,7 +41,7 @@ Server = https://github.com/misile00/misilix/releases/download/pkgbuild-ci
 EOF
 
 # Initialize pacman keyring and populate Arch Linux keyring
-pacman --init && pacman --populate archlinux
+pacman-key --init && pacman-key --populate archlinux
 
 # Create Rootfs
 [[ -f misilix/etc/os-release ]] || cat pkglist_server.txt | pacstrap -MGC ./pacman.conf misilix -
@@ -152,14 +152,15 @@ fi
 cp usr/local/resize-fs.sh misilix/usr/local/
 cp -r etc/* misilix/etc/
 chmod a+x misilix/etc/profile.d/pacman-init.sh misilix/usr/local/resize-fs.sh
-chroot misilix /usr/bin/systemctl enable pacman-init.service resize-fs.service NetworkManager.service sshd.service avahi-daemon.service
+chroot misilix /usr/bin/systemctl enable resize-fs.service NetworkManager.service sshd.service avahi-daemon.service
 sed -i s/#NTP=/NTP=0.pool.ntp.org/g misilix/etc/systemd/timesyncd.conf
-echo -e "\nen_US.UTF-8 UTF-8\nen_US ISO-8859-1" >> misilix/etc/locale.gen
+echo -e "\nC.UTF-8 UTF-8\nen_US.UTF-8 UTF-8\nen_US ISO-8859-1" >> misilix/etc/locale.gen
 echo "LANG=en_US.UTF-8" > misilix/etc/locale.conf
 echo "KEYMAP=trq" > misilix/etc/vconsole.conf
 echo -e "nameserver 8.8.8.8\nnameserver 8.8.8.4" > misilix/etc/resolv.conf
 sed -i "s/Arch Linux/Misilix Linux/g" misilix/etc/issue
 sed -i "s/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g" misilix/etc/sudoers
+echo "Defaults env_reset,pwfeedback" > misilix/etc/sudoers.d/10-pwfeedback
 chroot misilix /usr/bin/locale-gen
 
 # Create default user accounts
@@ -167,6 +168,7 @@ chroot misilix /bin/bash -c "useradd alarm -mUG wheel -m -u 1000"
 echo -e "root\nroot\n" | chroot misilix /bin/bash -c "passwd root"
 echo -e "alarm\nalarm\n" | chroot misilix /bin/bash -c "passwd alarm"
 find misilix/var/log/ -type f | xargs rm -f
+chroot misilix /bin/bash -c "pacman -Scc --noconfirm"
 
 # Create image
 size=$(echo "($(du -s "misilix" | cut -f 1) * 1.5) / 1" | bc)
