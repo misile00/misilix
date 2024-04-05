@@ -151,7 +151,7 @@ fi
 # Configure system
 echo -e "allowed_users=anybody\nneeds_root_rights=yes" > /etc/X11/Xwrapper.config
 cp usr/local/resize-fs.sh misilix/usr/local/
-cp -r etc/ misilix/etc/
+cp -r etc/* misilix/etc/
 chmod a+x misilix/etc/profile.d/pacman-init.sh misilix/usr/local/resize-fs.sh
 chroot misilix /usr/bin/systemctl enable pacman-init.service resize-fs.service NetworkManager.service sshd.service avahi-daemon.service
 sed -i s/#NTP=/NTP=0.pool.ntp.org/g misilix/etc/systemd/timesyncd.conf
