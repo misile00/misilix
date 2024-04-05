@@ -83,14 +83,12 @@ python-defusedxml
 python-packaging
 python-pyqt5
 raspberrypi-bootloader
-raspi-config-git
 ristretto
 rsync
 rtkit
 smartmontools
 sof-firmware
 sshfs
-thorium-browser-bin
 thunar-archive-plugin
 thunar-media-tags-plugin
 tint2

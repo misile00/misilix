@@ -36,7 +36,6 @@ pacman-contrib
 parted
 python
 raspberrypi-bootloader
-raspi-config-git
 rsync
 usb_modeswitch
 usbmuxd
