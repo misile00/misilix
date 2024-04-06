@@ -19,6 +19,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "server"
           prerelease: false
-          title: "Auto build | Misilix Server v1.0.0"
+          title: "Auto build | Misilix Server v1.0.1"
           files: |
             *.img.xz

@@ -19,6 +19,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "desktop"
           prerelease: true
-          title: "Auto build | Misilix Desktop v0.1.0"
+          title: "Auto build | Misilix Desktop v0.2.0"
           files: |
             *.img.xz
