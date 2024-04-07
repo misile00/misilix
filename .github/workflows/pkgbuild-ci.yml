@@ -23,7 +23,7 @@ jobs:
         pkgdir: pkgs/*
         repoName: "pkgbuild-ci"
         namcapDisable: true
-        makepkgArgs: --config ${{ github.workspace }}/makepkg.conf
+        makepkgArgs: --config $GITHUB_WORKSPACE/makepkg.conf
     - name: Print Package Files
       run: |
         echo "Successfully created the following package archive"
