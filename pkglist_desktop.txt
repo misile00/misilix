@@ -135,4 +135,5 @@ xorg
 xorg-drivers
 xorg-xinit
 xterm
+yay
 zram-generator

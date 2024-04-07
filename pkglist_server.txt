@@ -46,4 +46,5 @@ wget
 wireless-regdb
 wireless_tools
 wpa_supplicant
+yay
 zram-generator
