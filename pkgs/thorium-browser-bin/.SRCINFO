@@ -1,19 +1,15 @@
 pkgbase = thorium-browser-bin
 	pkgdesc = Chromium fork focused on high performance and security
-	pkgver = 122.0.6261.132
+	pkgver = 123.0.6312.133
 	pkgrel = 1
 	url = https://github.com/Alex313031/Thorium-Raspi
 	install = thorium-browser.install
 	arch = aarch64
 	license = BSD
-	optdepends = gnome-keyring: for storing passwords in GNOME keyring
-	optdepends = kdialog: for file dialogs in KDE
-	optdepends = kwallet5: for storing passwords in KWallet
-	optdepends = pipewire: WebRTC desktop sharing under Wayland
-	noextract = thorium-browser_122.0.6261.132_arm64.deb
+	noextract = thorium-browser_123.0.6312.133_arm64.deb
 	options = !emptydirs
 	options = !strip
-	source = https://github.com/Alex313031/Thorium-Raspi/releases/download/M122.0.6261.132/thorium-browser_122.0.6261.132_arm64.deb
+	source = https://github.com/Alex313031/Thorium-Raspi/releases/download/M123.0.6312.133/thorium-browser_123.0.6312.133_arm64.deb
 	sha256sums = SKIP
 
 pkgname = thorium-browser-bin
