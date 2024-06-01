@@ -6,8 +6,8 @@ if [[ -d /var/lib/apt/ ]] ; then
     cp /etc/apt/sources.list /etc/apt/sources.list.d/noble.list
     sed -i s/jammy/noble/g /etc/apt/sources.list.d/noble.list
     apt update
-    apt -t noble install arch-install-scripts --install-suggests -y
-    apt -t jammy install wget qemu-user-static binfmt-support wget unzip qemu-utils --install-suggests -y
+    apt -t noble install arch-install-scripts pacman-package-manager archlinux-keyring makepkg -y
+    apt -t jammy install wget qemu-user-static binfmt-support wget unzip qemu-utils -y
 fi
 
 mkdir -p misilix
