@@ -9,7 +9,7 @@ source_x86_64=("https://github.com/Morganamilo/paru/releases/download/v$pkgver/p
 source_aarch64=("https://github.com/Morganamilo/paru/releases/download/v$pkgver/paru-v$pkgver$_rel-aarch64.tar.zst")
 source_armv7h=("https://github.com/Morganamilo/paru/releases/download/v$pkgver/paru-v$pkgver$_rel-armv7h.tar.zst")
 backup=("etc/paru.conf")
-arch=('x86_64' 'aarch64' 'armv7h')
+arch=('aarch64')
 license=('GPL-3.0-or-later')
 depends=('git' 'pacman' 'libalpm.so>=14')
 optdepends=('bat: colored pkgbuild printing' 'devtools: build in chroot and downloading pkgbuilds')
