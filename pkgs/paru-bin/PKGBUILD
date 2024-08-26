@@ -5,9 +5,7 @@ pkgver=2.0.3
 pkgrel=3
 pkgdesc='Feature packed AUR helper'
 url='https://github.com/morganamilo/paru'
-source_x86_64=("https://github.com/Morganamilo/paru/releases/download/v$pkgver/paru-v$pkgver$_rel-x86_64.tar.zst")
 source_aarch64=("https://github.com/Morganamilo/paru/releases/download/v$pkgver/paru-v$pkgver$_rel-aarch64.tar.zst")
-source_armv7h=("https://github.com/Morganamilo/paru/releases/download/v$pkgver/paru-v$pkgver$_rel-armv7h.tar.zst")
 backup=("etc/paru.conf")
 arch=('aarch64')
 license=('GPL-3.0-or-later')
@@ -15,9 +13,7 @@ depends=('git' 'pacman' 'libalpm.so>=14')
 optdepends=('bat: colored pkgbuild printing' 'devtools: build in chroot and downloading pkgbuilds')
 conflicts=('paru')
 provides=('paru')
-sha256sums_x86_64=('30af90baf308a3aab7497f8d4c898abfaa2ecdb28310c903c470b8026a51a152')
 sha256sums_aarch64=('5e62a37971101e18812e7a1345f980a3f9137e2a5ac9b6135d6af9aab32fd3ab')
-sha256sums_armv7h=('225b6c235e551929098c5e7cdc915f4d8caa62f4e733c7a11075038b940c6641')
 
 package() {
   cd "$srcdir/"
