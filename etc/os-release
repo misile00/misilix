@@ -1,0 +1,9 @@
+NAME="Misilix Linux"
+PRETTY_NAME="Misilix Linux"
+ID=misilix
+ID_LIKE=misilix
+BUILD_ID=rolling
+ANSI_COLOR="38;2;23;147;209"
+HOME_URL="https://github.com/misile00/misilix"
+BUG_REPORT_URL="https://github.com/misile00/misilix/issues"
+LOGO=misilix-logo

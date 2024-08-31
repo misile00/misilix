@@ -159,8 +159,7 @@ echo -e "\nC.UTF-8 UTF-8\nen_US.UTF-8 UTF-8\nen_US ISO-8859-1" >> misilix/etc/lo
 echo "LANG=en_US.UTF-8" > misilix/etc/locale.conf
 echo "KEYMAP=trq" > misilix/etc/vconsole.conf
 echo -e "nameserver 8.8.8.8\nnameserver 8.8.8.4" > misilix/etc/resolv.conf
-sed -i "s/Arch Linux/Misilix Linux/g" misilix/etc/issue
-sed -i "s/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g" misilix/etc/sudoers
+echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" > misilix/etc/sudoers.d/10-nopasswd
 echo "Defaults env_reset,pwfeedback" > misilix/etc/sudoers.d/10-pwfeedback
 chroot misilix /usr/bin/locale-gen
 
